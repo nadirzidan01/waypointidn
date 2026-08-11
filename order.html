@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waypoint Indonesia Store - Order Here</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --primary: #0b3d5c;
+            --primary-mid: #1565a0;
+            --primary-light: #1e88c8;
+            --secondary: #0d9488;
+            --accent: #f97316;
+            --dark: #0f172a;
+            --light-bg: #f1f5f9;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+            --radius: 14px;
+            --radius-sm: 10px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Changa One', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(180deg, rgba(11, 61, 92, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%), url('riyun.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.55;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .top-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 24px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .brand-logo {
+            height: 68px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link-item {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+        }
+        
+        .nav-link-item:hover {
+            color: var(--primary);
+            background: rgba(15, 98, 160, 0.08);
+        }
+        
+        .nav-link-item.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            color: #ffffff;
+        }
+        
+        .cart-badge-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 30px auto 40px;
+            padding: 0 20px;
+        }
+        
+        .form-pesanan {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+        }
+        
+        .form-pesanan h3 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f1f5f9;
+            font-size: 17px;
+            color: var(--primary);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 700;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        
+        input,
+        select {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 16px;
+            border: 1.5px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            box-sizing: border-box;
+            font-size: 14px;
+            background: #f8fafc;
+            color: var(--dark);
+            transition: all 0.2s;
+        }
+        
+        input:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--primary-mid);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(21, 101, 160, 0.12);
+        }
+        
+        .ringkasan-pesanan {
+            background: linear-gradient(145deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 18px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .ringkasan-pesanan ul {
+            padding-left: 0;
+            margin: 0 0 12px 0;
+            list-style: none;
+        }
+        
+        .ringkasan-pesanan li {
+            margin-bottom: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .fee-info {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin: 10px 0;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .payment-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+        
+        .payment-card {
+            border: 1.5px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            background: #ffffff;
+        }
+        
+        .payment-card:hover {
+            border-color: var(--primary-light);
+            background: #f0f7ff;
+            transform: translateY(-2px);
+        }
+        
+        .payment-card input[type="radio"] {
+            display: none;
+        }
+        
+        .payment-card span {
+            font-size: 12.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            display: block;
+        }
+        
+        .payment-card:has(input[type="radio"]:checked) {
+            border-color: var(--primary);
+            background: linear-gradient(145deg, #eef6ff 0%, #e0f0ff 100%);
+            box-shadow: 0 0 0 3px rgba(21, 101, 160, 0.15);
+        }
+        
+        .payment-card:has(input[type="radio"]:checked) span {
+            color: var(--primary);
+        }
+        
+        .btn-kirim {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            color: white;
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(11, 61, 92, 0.3);
+            transition: all 0.25s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+        
+        .btn-kirim:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(11, 61, 92, 0.4);
+            filter: brightness(1.06);
+        }
+        
+        .modal-pembayaran {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(6px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content-pay {
+            background: white;
+            padding: 26px;
+            border-radius: 18px;
+            max-width: 390px;
+            width: 92%;
+            text-align: center;
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.22);
+            animation: modalIn 0.3s ease;
+        }
+        
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.94) translateY(12px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .qris-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            margin: 14px 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .bank-info {
+            background: #f8fafc;
+            border: 1.5px dashed #cbd5e1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin: 14px 0;
+            text-align: left;
+        }
+        
+        .btn-salin {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            cursor: pointer;
+            float: right;
+            font-weight: 700;
+        }
+        
+        .btn-close-modal {
+            background: #f1f5f9;
+            color: var(--dark);
+            border: none;
+            padding: 11px 16px;
+            border-radius: 10px;
+            margin-top: 10px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 700;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+        
+        .btn-close-modal:hover {
+            background: #e2e8f0;
+        }
+        
+        .payment-notice {
+            background: linear-gradient(145deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            color: #b45309;
+            padding: 10px 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            margin-bottom: 12px;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        @media (max-width: 680px) {
+            .top-navbar {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: space-between;
+                padding: 10px 14px;
+            }
+            .brand-logo {
+                height: 52px;
+            }
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                border-top: 1px solid var(--border-color);
+                padding-top: 8px;
+                margin-top: 4px;
+            }
+            .payment-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR TOP -->
+    <header class="top-navbar">
+        <div class="brand-logo-container">
+            <img src="logo.png" alt="Waypoint Store Logo" class="brand-logo">
+        </div>
+
+        <!-- KODE BARU -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link-item">Home</a></li>
+                <li><a href="menu.html" class="nav-link-item">Menu</a></li>
+                <li><a href="order.html" class="nav-link-item">Order</a></li>
+                <li><a href="about.html" class="nav-link-item">About Us</a></li>
+                <!-- SUDAH DIBUAT ABOUT US -->
+            </ul>
+        </nav>
+
+        <div class="nav-right-container">
+            <a href="order.html" class="cart-badge-btn">
+                CART 🛒 <span id="nav-cart-count" style="background:rgba(255,255,255,0.25); color:white; border-radius:50%; padding: 2px 8px; font-size:11px;">0</span>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- SHOPPING CART & ORDER FORM -->
+        <div class="form-pesanan">
+            <h3>Shopping Cart</h3>
+
+            <div class="ringkasan-pesanan">
+                <ul id="daftar-item">
+                    <li style="list-style: none; color: #64748b; margin-left: 0;">No items selected yet</li>
+                </ul>
+                <div class="fee-info">
+                    <span>Handling Fee:</span>
+                    <span id="handling-fee-text" style="font-weight:700;">Rp 0 / $0.00</span>
+                </div>
+                <p style="margin: 8px 0 0 0; border-top: 1px dashed #cbd5e1; padding-top: 8px; font-size: 15px;">
+                    <strong>Total: <span id="total-harga" style="color: var(--primary); font-size: 17px;">Rp 0 / $0.00</span></strong>
+                </p>
+            </div>
+
+            <h3>Crew & Vessel Details</h3>
+            <label for="nama">Crew Name:</label>
+            <input type="text" id="nama" placeholder="Enter crew full name" required>
+
+            <label for="nama-kapal">Vessel Name:</label>
+            <input type="text" id="nama-kapal" placeholder="e.g. AS CAROLINA / MV. SRIWANGI" required>
+
+            <h3>Payment Method</h3>
+            <div class="payment-options">
+                <label class="payment-card">
+                    <input type="radio" name="pembayaran" value="COD" checked>
+                    <div class="pay-content">
+                        <span>Cash on Delivery (COD)</span>
+                    </div>
+                </label>
+                <label class="payment-card">
+                    <input type="radio" name="pembayaran" value="QRIS">
+                    <div class="pay-content">
+                        <span>QRIS / E-Wallet</span>
+                    </div>
+                </label>
+                <label class="payment-card">
+                    <input type="radio" name="pembayaran" value="BCA">
+                    <div class="pay-content">
+                        <span>BCA Bank Transfer</span>
+                    </div>
+                </label>
+                <label class="payment-card">
+                    <input type="radio" name="pembayaran" value="MANDIRI">
+                    <div class="pay-content">
+                        <span>Mandiri Bank Transfer</span>
+                    </div>
+                </label>
+            </div>
+
+            <button class="btn-kirim" onclick="prosesPembayaran()">Proceed to Payment</button>
+
+            <!-- PAYMENT MODAL -->
+            <div class="modal-pembayaran" id="modalPembayaran">
+                <div class="modal-content-pay">
+                    <h3 id="modalTitle" style="margin-top:0; color: var(--primary);">Payment Instructions</h3>
+                    <div id="modalBody"></div>
+
+                    <button class="btn-kirim" onclick="konfirmasiDanKirimWA()" style="margin-top: 12px;">Confirm & Send Order (WA)</button>
+                    <button class="btn-close-modal" onclick="tutupModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const HANDLING_FEE_IDR = 36000;
+        const HANDLING_FEE_USD = 2.00;
+
+        let keranjang = JSON.parse(localStorage.getItem('waypoint_cart')) || [];
+        let totalIDR = 0;
+        let totalUSD = 0;
+
+        function updateUI() {
+            const daftarItem = document.getElementById('daftar-item');
+            const totalHarga = document.getElementById('total-harga');
+            const handlingFeeText = document.getElementById('handling-fee-text');
+            const navCartCount = document.getElementById('nav-cart-count');
+
+            let totalQty = 0;
+            totalIDR = 0;
+            totalUSD = 0;
+
+            // MENGELOMPOKKAN ITEM BERDASARKAN NAMA PRODUK
+            const itemDikelompokkan = keranjang.reduce((acc, item) => {
+                // Mencegah 'undefined' jika ada properti yang beda (seperti namaItem / nama)
+                const namaBarang = item.nama || item.namaItem || 'Unknown Item';
+                const hIDR = item.hargaIDR || 0;
+                const hUSD = item.hargaUSD || 0;
+                const qty = item.qty || 1;
+
+                if (!acc[namaBarang]) {
+                    acc[namaBarang] = {
+                        nama: namaBarang,
+                        hargaIDR: hIDR,
+                        hargaUSD: hUSD,
+                        jumlah: 0
+                    };
+                }
+                acc[namaBarang].jumlah += qty;
+                totalQty += qty;
+                totalIDR += (hIDR * qty);
+                totalUSD += (hUSD * qty);
+
+                return acc;
+            }, {});
+
+            navCartCount.textContent = totalQty;
+
+            if (Object.keys(itemDikelompokkan).length === 0) {
+                daftarItem.innerHTML = `<li style="list-style: none; color: #64748b; margin-left: 0;">No items selected yet</li>`;
+                handlingFeeText.textContent = `Rp 0 / $0.00`;
+                totalHarga.textContent = `Rp 0 / $0.00`;
+            } else {
+                daftarItem.innerHTML = '';
+
+                Object.values(itemDikelompokkan).forEach((itemGroup) => {
+                    let li = document.createElement('li');
+                    li.style.display = 'flex';
+                    li.style.justifyContent = 'space-between';
+                    li.style.alignItems = 'center';
+                    li.style.marginBottom = '8px';
+
+                    const totalItemHargaIDR = itemGroup.hargaIDR * itemGroup.jumlah;
+                    const totalItemHargaUSD = itemGroup.hargaUSD * itemGroup.jumlah;
+
+                    const qtyText = itemGroup.jumlah > 1 ? ` <b>(x${itemGroup.jumlah})</b>` : '';
+                    const namaAmanHapus = itemGroup.nama.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+
+                    li.innerHTML = `
+                        <span>${itemGroup.nama}${qtyText} - Rp ${totalItemHargaIDR.toLocaleString('id-ID')} ($${totalItemHargaUSD.toFixed(2)})</span>
+                        <button onclick="hapusSatuItem('${namaAmanHapus}')" title="Reduce/Remove item" style="
+                            background: transparent;
+                            color: #ef4444;
+                            border: none;
+                            padding: 2px 8px;
+                            border-radius: 50%;
+                            cursor: pointer;
+                            font-size: 16px;
+                            font-weight: bold;
+                            margin-left: 10px;
+                            transition: all 0.2s;
+                        " onmouseover="this.style.background='#fee2e2'" onmouseout="this.style.background='transparent'">✕</button>
+                    `;
+                    daftarItem.appendChild(li);
+                });
+
+                handlingFeeText.textContent = `Rp ${HANDLING_FEE_IDR.toLocaleString('id-ID')} / $${HANDLING_FEE_USD.toFixed(2)}`;
+                const grandTotalIDR = totalIDR + HANDLING_FEE_IDR;
+                const grandTotalUSD = totalUSD + HANDLING_FEE_USD;
+                totalHarga.textContent = `Rp ${grandTotalIDR.toLocaleString('id-ID')} / $${grandTotalUSD.toFixed(2)}`;
+            }
+        }
+
+        function hapusSatuItem(namaBarang) {
+            const index = keranjang.findIndex(item => (item.nama || item.namaItem) === namaBarang);
+
+            if (index !== -1) {
+                if (keranjang[index].qty && keranjang[index].qty > 1) {
+                    keranjang[index].qty -= 1;
+                } else {
+                    keranjang.splice(index, 1);
+                }
+                localStorage.setItem('waypoint_cart', JSON.stringify(keranjang));
+                updateUI();
+            }
+        }
+
+        function prosesPembayaran() {
+            const nama = document.getElementById('nama').value;
+            const namaKapal = document.getElementById('nama-kapal').value;
+            const metode = document.querySelector('input[name="pembayaran"]:checked').value;
+
+            if (!nama || !namaKapal || keranjang.length === 0) {
+                alert('Please fill in Crew Name, Vessel Name, and select at least one item!');
+                return;
+            }
+
+            const grandTotalIDR = totalIDR + HANDLING_FEE_IDR;
+            const grandTotalUSD = totalUSD + HANDLING_FEE_USD;
+
+            if (metode === 'COD') {
+                konfirmasiDanKirimWA();
+            } else if (metode === 'QRIS') {
+                document.getElementById('modalTitle').innerText = 'Payment via QRIS';
+                document.getElementById('modalBody').innerHTML = `
+                    <div class="payment-notice">
+                        <span class="payment-notice-icon">⚠️</span>
+                        <div><strong>Important:</strong> After completing payment, please send a photo of your transaction receipt via WhatsApp.</div>
+                    </div>
+                    <p style="margin-bottom:5px; font-size: 12px; color: #475569;">Scan QRIS using your E-Wallet or Mobile Banking App:</p>
+                    <img src="qris.jpeg" class="qris-img" alt="QRIS Code">
+                    <p style="margin:5px 0;"><strong>Total Amount: <span style="color: var(--primary);">Rp ${grandTotalIDR.toLocaleString('id-ID')} / $${grandTotalUSD.toFixed(2)}</span></strong></p>
+                `;
+                document.getElementById('modalPembayaran').style.display = 'flex';
+            } else if (metode === 'BCA' || metode === 'MANDIRI') {
+                const noRek = metode === 'BCA' ? '9999999999' : '9999999999999';
+                document.getElementById('modalTitle').innerText = `${metode} Bank Transfer`;
+                document.getElementById('modalBody').innerHTML = `
+                    <div class="payment-notice">
+                        <span class="payment-notice-icon">⚠️</span>
+                        <div><strong>Important:</strong> After transferring, please send your payment receipt via WhatsApp so your order can be processed.</div>
+                    </div>
+                    <div class="bank-info">
+                        <button class="btn-salin" onclick="navigator.clipboard.writeText('${noRek}'); alert('Account number copied!');">Copy</button>
+                        <p style="margin:0; font-size:11px; color:#64748b;">Account Number:</p>
+                        <p style="margin:4px 0 0 0; font-size:16px; font-weight:800; color: var(--primary);">${noRek}</p>
+                        <p style="margin:4px 0 0 0; font-size:11px; color:#64748b;">a.n Waypoint Store</p>
+                    </div>
+                    <p style="margin:5px 0;"><strong>Total Transfer: <span style="color: var(--primary);">Rp ${grandTotalIDR.toLocaleString('id-ID')} / $${grandTotalUSD.toFixed(2)}</span></strong></p>
+                `;
+                document.getElementById('modalPembayaran').style.display = 'flex';
+            }
+        }
+
+        function tutupModal() {
+            document.getElementById('modalPembayaran').style.display = 'none';
+        }
+
+        function konfirmasiDanKirimWA() {
+            const nama = document.getElementById('nama').value;
+            const namaKapal = document.getElementById('nama-kapal').value;
+            const opsiPembayaran = document.querySelector('input[name="pembayaran"]:checked').value;
+            const nomorWA_Dapur = "6285782937698";
+
+            const URL_GOOGLE_SCRIPT = "https://script.google.com/macros/s/AKfycbzweVd0K9cw1cBGRraPWHjPkq88I3jrVPx_3D1LhSLBzQGXwT5YbPDRHXFEEfmsv8E/exec";
+
+            const itemDikelompokkan = keranjang.reduce((acc, item) => {
+                const n = item.nama || item.namaItem || 'Item';
+                acc[n] = (acc[n] || 0) + (item.qty || 1);
+                return acc;
+            }, {});
+
+            let daftarPesananTeks = '';
+            let teksMenuWA = '';
+            let no = 1;
+
+            for (const [namaBarang, jumlah] of Object.entries(itemDikelompokkan)) {
+                const qtyText = jumlah > 1 ? ` *(x${jumlah})*` : '';
+                daftarPesananTeks += `${no}. ${namaBarang} (x${jumlah}) `;
+                teksMenuWA += `${no}. ${namaBarang}${qtyText}%0A`;
+                no++;
+            }
+
+            const grandTotalIDR = totalIDR + HANDLING_FEE_IDR;
+            const grandTotalUSD = totalUSD + HANDLING_FEE_USD;
+            const totalTeks = `Rp ${grandTotalIDR.toLocaleString('id-ID')} / $${grandTotalUSD.toFixed(2)} (inc. handling fee)`;
+
+            const payload = {
+                tanggal: new Date().toLocaleString('en-US'),
+                nama: nama,
+                namaKapal: namaKapal,
+                pesanan: daftarPesananTeks,
+                total: totalTeks,
+                metode: opsiPembayaran
+            };
+
+            fetch(URL_GOOGLE_SCRIPT, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            }).catch(err => console.error("Failed to save to Sheets:", err));
+
+            const pesan = `*WAYPOINT STORE ORDER*%0A%0A` +
+                `*Crew Name:* ${nama}%0A` +
+                `*Vessel Name:* ${namaKapal}%0A%0A` +
+                `*Order List:*%0A${teksMenuWA}%0A` +
+                `*Handling Fee:* Rp 36,000 / $2.00%0A` +
+                `*Total Amount:* Rp ${grandTotalIDR.toLocaleString('id-ID')} / $${grandTotalUSD.toFixed(2)}%0A` +
+                `*Payment Method:* ${opsiPembayaran}%0A%0A` +
+                `_Status: Awaiting Delivery & Payment Receipt via WA_`;
+
+            localStorage.removeItem('waypoint_cart');
+
+            window.open(`https://api.whatsapp.com/send?phone=${nomorWA_Dapur}&text=${pesan}`, '_blank');
+        }
+
+        // Render data saat dibuka
+        updateUI();
+    </script>
+</body>
+
+</html>

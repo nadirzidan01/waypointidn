@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waypoint Indonesia Store - Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --primary: #0b3d5c;
+            --primary-mid: #1565a0;
+            --primary-light: #1e88c8;
+            --dark: #0f172a;
+            --light-bg: #f1f5f9;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 12px 32px rgba(15, 23, 42, 0.12);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        .changa-one-regular {
+            font-family: "Changa One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        body {
+            font-family: 'Changa One', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(180deg, rgba(11, 61, 92, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%), url('riyun.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.55;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* NAVBAR TOP */
+        
+        .top-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 5%;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .brand-logo {
+            height: 68px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link-item {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+        }
+        
+        .nav-link-item:hover {
+            color: var(--primary);
+            background: rgba(15, 98, 160, 0.08);
+        }
+        
+        .nav-link-item.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            color: #ffffff;
+        }
+        
+        .cart-badge-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            cursor: pointer;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+        }
+        /* HERO SECTION */
+        
+        .home-section {
+            text-align: center;
+            padding: 60px 20px 40px 20px;
+            background: transparent;
+            color: #ffffff;
+        }
+        
+        .home-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .home-subtitle {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+            margin: 0 0 10px 0;
+            text-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .btn-cta {
+            background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 15px;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 4px 15px rgba(249, 115, 22, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(249, 115, 22, 0.6);
+        }
+        /* CONTAINER DIBUAT MEMANJANG (MAX-WIDTH: 1200PX) */
+        
+        .container {
+            max-width: 1200px;
+            width: 95%;
+            margin: 10px auto 50px auto;
+            padding: 0 10px;
+        }
+        /* TUTORIAL SECTION MEMANJANG */
+        
+        .tutorial-section {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 40px 32px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
+        }
+        
+        .tutorial-header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        
+        .tutorial-header h2 {
+            font-size: 28px;
+            color: #083344;
+            margin: 0 0 8px 0;
+            font-weight: 800;
+        }
+        
+        .tutorial-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0 0 20px 0;
+        }
+        /* TOMBOL PILIHAN BAHASA */
+        
+        .lang-switch-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .lang-btn {
+            border: none;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .lang-btn.active {
+            background: #0b3d5c;
+            color: #ffffff;
+        }
+        
+        .lang-btn.inactive {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        
+        .lang-btn.inactive:hover {
+            background: #e2e8f0;
+        }
+        /* GRID DIGANTI JADI EXACT 4 KOLOM MEMANJANG */
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        
+        .step-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        
+        .step-badge {
+            width: 32px;
+            height: 32px;
+            background: #0b3d5c;
+            color: #ffffff;
+            font-weight: 800;
+            font-size: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        
+        .step-card h4 {
+            margin: 0 0 10px 0;
+            color: #0f172a;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .step-card p {
+            margin: 0;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        /* RESPONSIVE UNTUK HP */
+        
+        @media (max-width: 900px) {
+            .steps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            .top-navbar {
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top-navbar">
+        <div class="brand-logo-container">
+            <img src="logo.png" alt="Waypoint Store Logo" class="brand-logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link-item active">Home</a></li>
+                <li><a href="menu.html" class="nav-link-item">Menu</a></li>
+                <li><a href="order.html" class="nav-link-item">Order</a></li>
+                <li><a href="about.html" class="nav-link-item">About Us</a></li>
+            </ul>
+        </nav>
+        <div>
+            <a href="order.html" class="cart-badge-btn">CART 🛒 <span id="nav-cart-count">0</span></a>
+        </div>
+    </header>
+
+    <section class="home-section">
+        <h1 class="home-title changa-one-regular">WAYPOINT INDONESIA STORE</h1>
+        <p class="home-subtitle">Tanjung Priok - Jakarta</p>
+        <p class="home-subtitle">Seamless Food & Essentials Delivery, Right to Your Deck</p>
+        <a href="menu.html" class="btn-cta">Explore Menu & Order Now</a>
+    </section>
+
+    <!-- CONTAINER MEMANJANG -->
+    <div class="container">
+        <div class="tutorial-section">
+            <div class="tutorial-header">
+                <h2>How to Order</h2>
+                <p>Simple & Easy Guide to Order Supplies Directly to Your Vessel</p>
+                <!-- GRID 4 KOLOM MEMANJANG -->
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-badge">1</div>
+                        <h4>Select Products</h4>
+                        <p>Browse through categories and click <strong>+ Add to Cart</strong> for items you wish to buy.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-badge">2</div>
+                        <h4>Fill In Details</h4>
+                        <p>Scroll to cart section, enter your full <strong>Crew Name</strong> and <strong>Vessel Name</strong> accurately.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-badge">3</div>
+                        <h4>Choose Payment</h4>
+                        <p>Select your preferred method: <strong>COD</strong>, <strong>QRIS</strong>, or <strong>Bank Transfer (BCA/Mandiri)</strong>.</p>
+                    </div>
+
+                    <div class="step-card">
+                        <div class="step-badge">4</div>
+                        <h4>Confirm & Send (WA)</h4>
+                        <p>Click <strong>Proceed</strong> and send your order via WhatsApp. For Transfer/QRIS, attach your payment receipt photo!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const keranjang = JSON.parse(localStorage.getItem('waypoint_cart')) || [];
+            const totalQty = keranjang.reduce((sum, item) => sum + (item.qty || 1), 0);
+            document.getElementById('nav-cart-count').textContent = totalQty;
+        </script>
+
+</body>
+
+</html>

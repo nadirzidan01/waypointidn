@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waypoint Indonesia Store - Menu Catalog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+         :root {
+            --primary: #0b3d5c;
+            --primary-mid: #1565a0;
+            --dark: #0f172a;
+            --text-muted: #64748b;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.06);
+            --shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
+            --radius: 14px;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        .changa-one-regular {
+            font-family: "Changa One", sans-serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        .changa-one-regular-italic {
+            font-family: "Changa One", sans-serif;
+            font-weight: 400;
+            font-style: italic;
+        }
+        
+        body {
+            font-family: 'Changa One', system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(180deg, rgba(11, 61, 92, 0.75) 0%, rgba(15, 23, 42, 0.85) 100%), url('riyun.webp');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: var(--dark);
+            line-height: 1.55;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* NAVBAR TOP FULL SAMPAI UJUNG */
+        
+        .top-navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 12px 24px;
+            /* Padding samping dikecilkan agar membentang ujung ke ujung */
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .brand-logo {
+            height: 68px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav-link-item {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 8px 16px;
+            border-radius: 30px;
+            transition: all 0.25s ease;
+        }
+        
+        .nav-link-item:hover {
+            color: var(--primary);
+            background: rgba(15, 98, 160, 0.08);
+        }
+        
+        .nav-link-item.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            color: #ffffff;
+        }
+        
+        .cart-badge-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-mid) 100%);
+            border: none;
+            padding: 10px 18px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 13px;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            margin: 30px auto 40px;
+            padding: 0 20px;
+        }
+        /* TULISAN CATALOG MENU JADI WARNA PUTIH */
+        
+        .catalog-title {
+            text-align: center;
+            color: #ffffff !important;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+        }
+        
+        .category-wrapper {
+            margin-bottom: 28px;
+            background: #ffffff;
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .category-nav {
+            display: flex;
+            overflow-x: auto;
+            gap: 6px;
+            justify-content: center;
+        }
+        
+        .cat-btn {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+        
+        .cat-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .menu-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            gap: 20px;
+        }
+        
+        .menu-item {
+            background: var(--card-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .menu-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+        }
+        
+        .menu-info {
+            padding: 14px;
+        }
+        
+        .menu-info h3 {
+            margin: 0 0 8px 0;
+            font-size: 16px;
+            color: #0f172a;
+        }
+        
+        .btn-tambah {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.2s ease;
+        }
+        
+        .btn-tambah:hover {
+            background: var(--primary-mid);
+        }
+        
+        @media (max-width: 680px) {
+            .top-navbar {
+                flex-wrap: wrap;
+                justify-content: space-between;
+                padding: 12px 16px;
+            }
+            .nav-links {
+                order: 3;
+                width: 100%;
+                justify-content: center;
+                margin-top: 8px;
+            }
+            .category-nav {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="top-navbar">
+        <div class="brand-logo-container">
+            <img src="logo.png" alt="Waypoint Store Logo" class="brand-logo">
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="nav-link-item">Home</a></li>
+                <li><a href="menu.html" class="nav-link-item active">Menu</a></li>
+                <li><a href="order.html" class="nav-link-item">Order</a></li>
+                <li><a href="about.html" class="nav-link-item">About Us</a></li>
+            </ul>
+        </nav>
+        <div>
+            <a href="order.html" class="cart-badge-btn">CART 🛒 <span id="nav-cart-count">0</span></a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- TULISAN DENGAN KELAS BARU & WARNA PUTIH -->
+        <h2 class="catalog-title changa-one-regular">Catalog Menu</h2>
+
+        <div class="category-wrapper">
+            <div class="category-nav">
+                <button class="cat-btn active" onclick="filterMenu('fastfood', this)">Fast Food</button>
+                <button class="cat-btn" onclick="filterMenu('softdrink', this)">Soft Drink</button>
+                <button class="cat-btn" onclick="filterMenu('snacks', this)">Snacks</button>
+                <button class="cat-btn" onclick="filterMenu('fruit', this)">Fruit</button>
+                <button class="cat-btn" onclick="filterMenu('cigarette', this)">Cigarette</button>
+                <button class="cat-btn" onclick="filterMenu('souvenir', this)">Souvenir</button>
+            </div>
+        </div>
+
+        <div class="menu-container" id="menu-list"></div>
+    </div>
+
+    <script>
+        const databaseMenu = [{
+            nama: "Double Beef Burger",
+            hargaIDR: 45000,
+            hargaUSD: 2.50,
+            kategori: "fastfood",
+            gambar: "beefb.jpg"
+        }, {
+            nama: "Crispy Chicken & Fries",
+            hargaIDR: 40000,
+            hargaUSD: 2.20,
+            kategori: "fastfood",
+            gambar: "cris.jpg"
+        }, {
+            nama: "Pepperoni Pizza",
+            hargaIDR: 150000,
+            hargaUSD: 8.30,
+            kategori: "fastfood",
+            gambar: "pepe.jpg"
+        }, {
+            nama: "1 Pcs Chicken + 1 Rice KFC",
+            hargaIDR: 29000,
+            hargaUSD: 1.60,
+            kategori: "fastfood",
+            gambar: "ayam.jpeg"
+        }, {
+            nama: "KFC Super Besar 1 (1 Pc Chicken + 1 Rice + 1 Coca-Cola Medium)",
+            hargaIDR: 45000,
+            hargaUSD: 2.50,
+            kategori: "fastfood",
+            gambar: "spe1.jpeg"
+        }, {
+            nama: "KFC Super Besar 2 (2 Pc Chicken + 1 Rice + 1 Coca-Cola Medium)",
+            hargaIDR: 55000,
+            hargaUSD: 3.05,
+            kategori: "fastfood",
+            gambar: "spe2.jpeg"
+        }, {
+            nama: "Soto Betawi",
+            hargaIDR: 25000,
+            hargaUSD: 1.40,
+            kategori: "fastfood",
+            gambar: "sobet.jpg"
+        }, {
+            nama: "Sate Madura",
+            hargaIDR: 30000,
+            hargaUSD: 1.70,
+            kategori: "fastfood",
+            gambar: "sate.jpg"
+        }, {
+            nama: "Coca Cola 390 Ml",
+            hargaIDR: 8000,
+            hargaUSD: 0.44,
+            kategori: "softdrink",
+            gambar: "cola.jpg"
+        }, {
+            nama: "Sprite 390 Ml",
+            hargaIDR: 8000,
+            hargaUSD: 0.44,
+            kategori: "softdrink",
+            gambar: "sprite.jpg"
+        }, {
+            nama: "Fanta 390 Ml",
+            hargaIDR: 8000,
+            hargaUSD: 0.44,
+            kategori: "softdrink",
+            gambar: "fanta.jpg"
+        }, {
+            nama: "Bintang Zero Soft 330 Ml",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "softdrink",
+            gambar: "bntg.jpg"
+        }, {
+            nama: "Nipis Madu 330 Ml",
+            hargaIDR: 8000,
+            hargaUSD: 0.44,
+            kategori: "softdrink",
+            gambar: "nipis.jpg"
+        }, {
+            nama: "You C1000 Apple 140ml",
+            hargaIDR: 12000,
+            hargaUSD: 0.66,
+            kategori: "softdrink",
+            gambar: "c1000apel.jpg"
+        }, {
+            nama: "You C1000 Orange 140ml",
+            hargaIDR: 12000,
+            hargaUSD: 0.66,
+            kategori: "softdrink",
+            gambar: "c1000jeruk.jpg"
+        }, {
+            nama: "Lays",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "lays.jpg"
+        }, {
+            nama: "Chitato",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "ctt.jpg"
+        }, {
+            nama: "Piattos",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "piattos.jpg"
+        }, {
+            nama: "Japota",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "jpt.jpg"
+        }, {
+            nama: "Sponge Taro",
+            hargaIDR: 12000,
+            hargaUSD: 0.66,
+            kategori: "snacks",
+            gambar: "sptr.jpg"
+        }, {
+            nama: "Sponge Chocolate",
+            hargaIDR: 12000,
+            hargaUSD: 0.66,
+            kategori: "snacks",
+            gambar: "spck.jpg"
+        }, {
+            nama: "Qtela",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "qtela.jpg"
+        }, {
+            nama: "Pringles",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "pring.jpg"
+        }, {
+            nama: "Pillows Chocolate",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "pilck.jpg"
+        }, {
+            nama: "Pillows Ubi",
+            hargaIDR: 15000,
+            hargaUSD: 0.83,
+            kategori: "snacks",
+            gambar: "pilubi.jpg"
+        }, {
+            nama: "Apple 1 Pcs",
+            hargaIDR: 35000,
+            hargaUSD: 1.94,
+            kategori: "fruit",
+            gambar: "apel.jpg"
+        }, {
+            nama: "Grape 1 Pcs",
+            hargaIDR: 50000,
+            hargaUSD: 2.77,
+            kategori: "fruit",
+            gambar: "anggur.jpg"
+        }, {
+            nama: "Orange 1 Pcs",
+            hargaIDR: 30000,
+            hargaUSD: 1.66,
+            kategori: "fruit",
+            gambar: "jeruk.jpg"
+        }, {
+            nama: "Avocado 1 Pcs",
+            hargaIDR: 35000,
+            hargaUSD: 1.94,
+            kategori: "fruit",
+            gambar: "alpukat.jpg"
+        }, {
+            nama: "Watermelon 1 Pcs",
+            hargaIDR: 30000,
+            hargaUSD: 1.66,
+            kategori: "fruit",
+            gambar: "semangka.jpg"
+        }, {
+            nama: "Melon 1 pcs",
+            hargaIDR: 45000,
+            hargaUSD: 2.50,
+            kategori: "fruit",
+            gambar: "melon.jpg"
+        }, {
+            nama: "Banana 1 Pcs",
+            hargaIDR: 25000,
+            hargaUSD: 1.40,
+            kategori: "fruit",
+            gambar: "pisang.jpg"
+        }, {
+            nama: "Pineapple 1 Pcs",
+            hargaIDR: 40000,
+            hargaUSD: 2.22,
+            kategori: "fruit",
+            gambar: "nanas.jpg"
+        }, {
+            nama: "Marlboro Hard Pack Special Edition 20",
+            hargaIDR: 50000,
+            hargaUSD: 2.77,
+            kategori: "cigarette",
+            gambar: "mbred.jpg"
+        }, {
+            nama: "Sampoerna Mild 16",
+            hargaIDR: 40000,
+            hargaUSD: 2.22,
+            kategori: "cigarette",
+            gambar: "sm.jpg"
+        }, {
+            nama: "Gudang Garam Filter 12",
+            hargaIDR: 30000,
+            hargaUSD: 1.66,
+            kategori: "cigarette",
+            gambar: "garpit.webp"
+        }, {
+            nama: "Magnum Filter 12",
+            hargaIDR: 27000,
+            hargaUSD: 1.50,
+            kategori: "cigarette",
+            gambar: "magnum.jpg"
+        }, {
+            nama: "Dji Samsoe 12",
+            hargaIDR: 25000,
+            hargaUSD: 1.40,
+            kategori: "cigarette",
+            gambar: "djss.jpg"
+        }, {
+            nama: "Marlboro Filter Black 12",
+            hargaIDR: 28000,
+            hargaUSD: 1.55,
+            kategori: "cigarette",
+            gambar: "marlong12.webp"
+        }, {
+            nama: "Marlboro Filter Black 16",
+            hargaIDR: 37000,
+            hargaUSD: 2.06,
+            kategori: "cigarette",
+            gambar: "marlong16.jpg"
+        }, {
+            nama: "Marlboro Ice Burst 20",
+            hargaIDR: 60000,
+            hargaUSD: 3.33,
+            kategori: "cigarette",
+            gambar: "mice.jpg"
+        }, {
+            nama: "Marlboro Gold Light Special Edition 20",
+            hargaIDR: 47000,
+            hargaUSD: 2.60,
+            kategori: "cigarette",
+            gambar: "mgold.jpg"
+        }, {
+            nama: "Sampoerna Avolution 20",
+            hargaIDR: 45000,
+            hargaUSD: 2.50,
+            kategori: "cigarette",
+            gambar: "sav.jpg"
+        }, {
+            nama: "LA Mild 16",
+            hargaIDR: 35000,
+            hargaUSD: 1.94,
+            kategori: "cigarette",
+            gambar: "la.webp"
+        }, {
+            nama: "LA Ice 16",
+            hargaIDR: 38000,
+            hargaUSD: 2.11,
+            kategori: "cigarette",
+            gambar: "la.jpg"
+        }, {
+            nama: "LA Ice Purple Boost 16",
+            hargaIDR: 38000,
+            hargaUSD: 2.11,
+            kategori: "cigarette",
+            gambar: "lapur.jpg"
+        }, {
+            nama: "Esse Change Juicy 20",
+            hargaIDR: 47000,
+            hargaUSD: 2.60,
+            kategori: "cigarette",
+            gambar: "essej.jpg"
+        }, {
+            nama: "Esse Change Applemint 20",
+            hargaIDR: 47000,
+            hargaUSD: 2.60,
+            kategori: "cigarette",
+            gambar: "essea.jpg"
+        }, {
+            nama: "Esse Double Pop 20",
+            hargaIDR: 47000,
+            hargaUSD: 2.60,
+            kategori: "cigarette",
+            gambar: "essed.jpg"
+        }, {
+            nama: "Esse Change Filter Grape 20",
+            hargaIDR: 47000,
+            hargaUSD: 2.60,
+            kategori: "cigarette",
+            gambar: "esseg.jpg"
+        }, {
+            nama: "Waypoint T-Shirt",
+            hargaIDR: 120000,
+            hargaUSD: 6.65,
+            kategori: "souvenir",
+            gambar: "tshirt.png"
+        }, {
+            nama: "Waypoint Keychain",
+            hargaIDR: 25000,
+            hargaUSD: 1.40,
+            kategori: "souvenir",
+            gambar: "keyc.jpg"
+        }, {
+            nama: "Waypoint Cap",
+            hargaIDR: 85000,
+            hargaUSD: 4.70,
+            kategori: "souvenir",
+            gambar: "cap.png"
+        }, {
+            nama: "Waypoint Ceramic Mug",
+            hargaIDR: 45000,
+            hargaUSD: 2.50,
+            kategori: "souvenir",
+            gambar: "mug.png"
+        }, {
+            nama: "Tumbler Stainless Steel",
+            hargaIDR: 135000,
+            hargaUSD: 7.50,
+            kategori: "souvenir",
+            gambar: "tumb.png"
+        }];
+
+        let keranjang = JSON.parse(localStorage.getItem('waypoint_cart')) || [];
+
+        function updateCartCount() {
+            const totalQty = keranjang.reduce((sum, item) => sum + (item.qty || 1), 0);
+            document.getElementById('nav-cart-count').textContent = totalQty;
+        }
+
+        function renderMenu(kategori) {
+            const container = document.getElementById('menu-list');
+            container.innerHTML = '';
+
+            databaseMenu.forEach(item => {
+                if (item.kategori.toLowerCase() === kategori.toLowerCase()) {
+                    container.innerHTML += `
+                <div class="menu-item">
+                    <img src="${item.gambar}" class="menu-img" alt="${item.nama}">
+                    <div class="menu-info">
+                        <h3>${item.nama}</h3>
+                        <p style="color: var(--primary); font-weight:700; margin:0;">Rp ${item.hargaIDR.toLocaleString('id-ID')} ($${item.hargaUSD.toFixed(2)})</p>
+                    </div>
+                    <button class="btn-tambah" onclick="tambahKeKeranjang('${item.nama}', ${item.hargaIDR}, ${item.hargaUSD})">+ Add to Cart</button>
+                </div>
+            `;
+                }
+            });
+        }
+
+        function filterMenu(kategori, btn) {
+            document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderMenu(kategori);
+        }
+
+        function tambahKeKeranjang(namaItem, hargaIDR, hargaUSD) {
+            const existingIndex = keranjang.findIndex(item => item.namaItem === namaItem);
+
+            if (existingIndex > -1) {
+                keranjang[existingIndex].qty += 1;
+            } else {
+                keranjang.push({
+                    namaItem,
+                    hargaIDR,
+                    hargaUSD,
+                    qty: 1
+                });
+            }
+
+            localStorage.setItem('waypoint_cart', JSON.stringify(keranjang));
+            updateCartCount();
+            alert(`${namaItem} added to cart!`);
+        }
+
+        updateCartCount();
+        renderMenu('fastfood');
+    </script>
+</body>
+
+</html>
