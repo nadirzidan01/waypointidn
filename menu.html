@@ -31,12 +31,6 @@
             font-style: normal;
         }
         
-        .changa-one-regular-italic {
-            font-family: "Changa One", sans-serif;
-            font-weight: 400;
-            font-style: italic;
-        }
-        
         body {
             font-family: 'Changa One', system-ui, -apple-system, sans-serif;
             margin: 0;
@@ -191,8 +185,9 @@
         
         .menu-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 20px;
+            align-items: start;
         }
         
         .menu-item {
@@ -204,24 +199,88 @@
             flex-direction: column;
             justify-content: space-between;
             box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+        
+        .img-wrapper {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
         }
         
         .menu-img {
             width: 100%;
-            height: 140px;
+            height: 150px;
             object-fit: contain;
             padding: 12px;
             background-color: #ffffff;
+            display: block;
+            transition: transform 0.2s ease;
+        }
+        
+        .img-wrapper:hover .menu-img {
+            transform: scale(1.03);
+        }
+        
+        .img-hint {
+            position: absolute;
+            bottom: 6px;
+            right: 10px;
+            background: rgba(11, 61, 92, 0.75);
+            color: #fff;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            pointer-events: none;
         }
         
         .menu-info {
             padding: 14px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .menu-info h3 {
-            margin: 0 0 8px 0;
+            margin: 0 0 6px 0;
             font-size: 16px;
             color: #0f172a;
+        }
+        
+        .menu-price {
+            color: var(--primary);
+            font-weight: 400;
+            margin: 0 0 10px 0;
+            font-size: 14px;
+        }
+        /* Detail memanjang ke bawah (collapsible) */
+        
+        .menu-ingredients {
+            display: none;
+            font-family: system-ui, -apple-system, sans-serif;
+            font-size: 12px;
+            color: #64748b;
+            line-height: 1.4;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed #e2e8f0;
+            animation: fadeInDown 0.25s ease-in-out forwards;
+        }
+        
+        .menu-ingredients.show {
+            display: block;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .btn-tambah {
@@ -244,7 +303,7 @@
         }
         
         .footer-banner {
-            background-color: var(--footer-bg);
+            background-color: var(--primary);
             color: #f8fafc;
             padding: 24px 5%;
             margin-top: 50px;
@@ -330,21 +389,6 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        
-        .footer-links {
-            display: flex;
-            gap: 16px;
-        }
-        
-        .footer-links a {
-            color: #cbd5e1;
-            text-decoration: none;
-        }
-        
-        .footer-links a:hover {
-            color: #ffffff;
-        }
-        /* Animasi memantul (bounce) badge keranjang */
         
         @keyframes cartBounce {
             0% {
@@ -449,7 +493,6 @@
                     </a>
                 </div>
 
-                <!-- Link Perusahaan di Bawah Kontak WA -->
                 <div style="margin-top: 6px;">
                     <div class="footer-section-title">Company Website</div>
                     <a href="http://www.waypointports.com/" target="_blank" style="color: #38bdf8; text-decoration: none; font-size: 13px; font-weight: 500;">
@@ -460,7 +503,7 @@
         </div>
 
         <div class="footer-bottom-row">
-            <div class="footer-links">
+            <div>
                 TM & Copyright 2026 Waypoint Store Indonesia. All Rights Reserved.
             </div>
         </div>
@@ -468,389 +511,517 @@
 
     <script>
         const databaseMenu = [{
+            id: 1,
             nama: "Double Beef Burger",
             hargaIDR: 45000,
             hargaUSD: 2.50,
             kategori: "fastfood",
-            gambar: "beefb.jpg"
+            gambar: "beefb.jpg",
+            ingredients: "Double beef patty, cheddar cheese, pickles, onions, ketchup, mustard, and toasted sesame bun."
         }, {
+            id: 2,
             nama: "Chicken Burger",
             hargaIDR: 40000,
             hargaUSD: 2.22,
             kategori: "fastfood",
-            gambar: "cbur.png"
+            gambar: "cbur.png",
+            ingredients: "Crispy fried chicken breast, lettuce, creamy mayonnaise, served on a toasted bun."
         }, {
+            id: 3,
             nama: "Pepperoni Pizza",
             hargaIDR: 150000,
             hargaUSD: 8.30,
             kategori: "fastfood",
-            gambar: "pep.jpg"
+            gambar: "pep.jpg",
+            ingredients: "Hand-tossed dough, tomato sauce, mozzarella cheese, and sliced beef pepperoni."
         }, {
+            id: 4,
             nama: "1 Pcs Chicken + 1 Rice KFC",
             hargaIDR: 29000,
             hargaUSD: 1.60,
             kategori: "fastfood",
-            gambar: "ayam.jpeg"
+            gambar: "ayam.jpeg",
+            ingredients: "1 piece of Original/Crispy KFC fried chicken served with steamed white rice."
         }, {
+            id: 5,
             nama: "KFC Super Besar 1 (1 Pc Chicken + 1 Rice + 1 Coca-Cola Medium)",
             hargaIDR: 45000,
             hargaUSD: 2.50,
             kategori: "fastfood",
-            gambar: "spe1.jpeg"
+            gambar: "spe1.jpeg",
+            ingredients: "1 piece KFC fried chicken, 1 portion steamed rice, and 1 medium Coca-Cola."
         }, {
+            id: 6,
             nama: "KFC Super Besar 2 (2 Pc Chicken + 1 Rice + 1 Coca-Cola Medium)",
             hargaIDR: 55000,
             hargaUSD: 3.05,
             kategori: "fastfood",
-            gambar: "spe2.jpeg"
+            gambar: "spe2.jpeg",
+            ingredients: "2 pieces KFC fried chicken, 1 portion steamed rice, and 1 medium Coca-Cola."
         }, {
+            id: 7,
             nama: "Soto Betawi",
             hargaIDR: 25000,
             hargaUSD: 1.40,
             kategori: "fastfood",
-            gambar: "sto.jpg"
+            gambar: "sto.jpg",
+            ingredients: "Traditional Jakarta beef soup with coconut milk & cow's milk broth, aromatic herbs, tomato, and emping crackers."
         }, {
+            id: 8,
             nama: "Sate Madura",
             hargaIDR: 30000,
             hargaUSD: 1.70,
             kategori: "fastfood",
-            gambar: "ste.jpg"
+            gambar: "ste.jpg",
+            ingredients: "Grilled chicken skewers served with rich savory peanut sauce, sweet soy sauce, and diced shallots."
         }, {
+            id: 9,
             nama: "French Fries",
             hargaIDR: 28000,
             hargaUSD: 1.65,
             kategori: "fastfood",
-            gambar: "ktg.png"
+            gambar: "ktg.png",
+            ingredients: "Crispy golden potato fries lightly seasoned with sea salt."
         }, {
+            id: 10,
             nama: "Coca Cola 390 Ml",
             hargaIDR: 8000,
             hargaUSD: 0.44,
             kategori: "softdrink",
-            gambar: "cola.jpg"
+            gambar: "cola.jpg",
+            ingredients: "Carbonated water, sugar, caramel color, phosphoric acid, natural flavors, caffeine."
         }, {
+            id: 11,
             nama: "Sprite 390 Ml",
             hargaIDR: 8000,
             hargaUSD: 0.44,
             kategori: "softdrink",
-            gambar: "sprite.jpg"
+            gambar: "sprite.jpg",
+            ingredients: "Carbonated water, high fructose corn syrup, citric acid, natural lemon-lime flavors."
         }, {
+            id: 12,
             nama: "Fanta 390 Ml",
             hargaIDR: 8000,
             hargaUSD: 0.44,
             kategori: "softdrink",
-            gambar: "fanta.jpg"
+            gambar: "fanta.jpg",
+            ingredients: "Carbonated water, sugar, citric acid, natural orange flavors, food coloring."
         }, {
+            id: 13,
             nama: "Bintang Zero Soft 330 Ml",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "softdrink",
-            gambar: "bntg.jpg"
+            gambar: "bntg.jpg",
+            ingredients: "Non-alcoholic malt beverage with carbonated water, sugar, malt extract, and hops flavor."
         }, {
+            id: 14,
             nama: "Nipis Madu 330 Ml",
             hargaIDR: 8000,
             hargaUSD: 0.44,
             kategori: "softdrink",
-            gambar: "nipis.jpg"
+            gambar: "nipis.jpg",
+            ingredients: "Carbonated lime juice drink infused with natural honey extract."
         }, {
+            id: 15,
             nama: "Nescafe Coffee Drink Ice Black 220ml",
             hargaIDR: 10000,
             hargaUSD: 0.55,
             kategori: "softdrink",
-            gambar: "NIB.jpg"
+            gambar: "NIB.jpg",
+            ingredients: "Water, soluble coffee extract, sugar, acidity regulator."
         }, {
+            id: 16,
             nama: "Nescafe Coffee Drink Latte 220ml",
             hargaIDR: 10000,
             hargaUSD: 0.55,
             kategori: "softdrink",
-            gambar: "nil.jpg"
+            gambar: "nil.jpg",
+            ingredients: "Water, skimmed milk powder, soluble coffee, sugar, milk fat."
         }, {
+            id: 17,
             nama: "Nescafe Coffee Drink Cappucino 220ml",
             hargaIDR: 10000,
             hargaUSD: 0.55,
             kategori: "softdrink",
-            gambar: "nic.jpg"
+            gambar: "nic.jpg",
+            ingredients: "Water, skimmed milk powder, soluble coffee, cocoa powder, sugar."
         }, {
+            id: 18,
             nama: "Nescafe Coffee Drink Caramel Macchiato 220ml",
             hargaIDR: 10000,
             hargaUSD: 0.55,
             kategori: "softdrink",
-            gambar: "nicm.jpg"
+            gambar: "nicm.jpg",
+            ingredients: "Water, skimmed milk powder, coffee extract, caramel flavor, sugar."
         }, {
+            id: 19,
             nama: "Milo Healthy Drink Extra Choco Boost Up 220mL",
             hargaIDR: 13000,
             hargaUSD: 0.73,
             kategori: "softdrink",
-            gambar: "mec.jpg"
+            gambar: "mec.jpg",
+            ingredients: "Malt extract, milk solids, cocoa powder, sugar, vitamins and minerals."
         }, {
+            id: 20,
             nama: "Coca Cola Soft Drink 1L",
             hargaIDR: 12300,
             hargaUSD: 0.73,
             kategori: "softdrink",
-            gambar: "cc.jpg"
+            gambar: "cc.jpg",
+            ingredients: "Carbonated water, sugar, caramel color, phosphoric acid, natural flavors, caffeine."
         }, {
+            id: 21,
             nama: "Sprite Soft Drink 1L",
             hargaIDR: 13000,
             hargaUSD: 0.73,
             kategori: "softdrink",
-            gambar: "spr.jpg"
+            gambar: "spr.jpg",
+            ingredients: "Carbonated water, high fructose corn syrup, citric acid, natural lemon-lime flavors."
         }, {
+            id: 22,
             nama: "You C1000 Apple 140ml",
             hargaIDR: 12000,
             hargaUSD: 0.66,
             kategori: "softdrink",
-            gambar: "c1000apel.jpg"
+            gambar: "c1000apel.jpg",
+            ingredients: "1000mg Vitamin C, fresh apple juice, sugar, natural apple flavor, water."
         }, {
+            id: 23,
             nama: "You C1000 Orange 140ml",
             hargaIDR: 12000,
             hargaUSD: 0.66,
             kategori: "softdrink",
-            gambar: "c1000jeruk.jpg"
+            gambar: "c1000jeruk.jpg",
+            ingredients: "1000mg Vitamin C, fresh orange juice, sugar, natural orange flavor, water."
         }, {
+            id: 24,
             nama: "Lays",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "lays.jpg"
+            gambar: "lays.jpg",
+            ingredients: "Selected potatoes, vegetable oil, sea salt, barbecue/salmon flavoring."
         }, {
+            id: 25,
             nama: "Chitato",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "ctt.jpg"
+            gambar: "ctt.jpg",
+            ingredients: "Wavy cut fresh potatoes, palm oil, beef barbecue seasoning, monosodium glutamate."
         }, {
+            id: 26,
             nama: "Piattos",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "piattos.jpg"
+            gambar: "piattos.jpg",
+            ingredients: "Hexagonal potato crisps, vegetable oil, sour cream & onion / barbecue seasoning."
         }, {
+            id: 27,
             nama: "Japota",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "jpt.jpg"
+            gambar: "jpt.jpg",
+            ingredients: "Thin-cut potato chips made from real potatoes, seaweed/honey butter seasoning."
         }, {
+            id: 28,
             nama: "Sponge Taro",
             hargaIDR: 12000,
             hargaUSD: 0.66,
             kategori: "snacks",
-            gambar: "sptr.jpg"
+            gambar: "sptr.jpg",
+            ingredients: "Corn, sugar, vegetable oil, taro powder flavoring, milk powder."
         }, {
+            id: 29,
             nama: "Sponge Chocolate",
             hargaIDR: 12000,
             hargaUSD: 0.66,
             kategori: "snacks",
-            gambar: "spck.jpg"
+            gambar: "spck.jpg",
+            ingredients: "Corn, sugar, vegetable oil, cocoa powder, chocolate flavor."
         }, {
+            id: 30,
             nama: "Qtela",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "qtela.jpg"
+            gambar: "qtela.jpg",
+            ingredients: "Selected cassava chips, vegetable oil, balado/chili seasoning."
         }, {
+            id: 31,
             nama: "Pringles",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "pring.jpg"
+            gambar: "pring.jpg",
+            ingredients: "Dried potatoes, vegetable oil, degerminated yellow corn flour, wheat starch, salt."
         }, {
+            id: 32,
             nama: "Pillows Chocolate",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "pilck.jpg"
+            gambar: "pilck.jpg",
+            ingredients: "Crunchy cereal pillow filled with rich chocolate cream."
         }, {
+            id: 33,
             nama: "Pillows Ubi",
             hargaIDR: 15000,
             hargaUSD: 0.83,
             kategori: "snacks",
-            gambar: "pilubi.jpg"
+            gambar: "pilubi.jpg",
+            ingredients: "Crunchy cereal pillow filled with sweet purple yam cream."
         }, {
+            id: 34,
             nama: "Apple 1 Pcs",
             hargaIDR: 35000,
             hargaUSD: 1.94,
             kategori: "fruit",
-            gambar: "apel.jpg"
+            gambar: "apel.jpg",
+            ingredients: "100% Fresh premium quality red/green apple."
         }, {
+            id: 35,
             nama: "Grape 1 Pcs",
             hargaIDR: 50000,
             hargaUSD: 2.77,
             kategori: "fruit",
-            gambar: "anggur.jpg"
+            gambar: "anggur.jpg",
+            ingredients: "Fresh seedless sweet black/red grapes."
         }, {
+            id: 36,
             nama: "Orange 1 Pcs",
             hargaIDR: 30000,
             hargaUSD: 1.66,
             kategori: "fruit",
-            gambar: "jeruk.jpg"
+            gambar: "jeruk.jpg",
+            ingredients: "100% Fresh juicy orange."
         }, {
+            id: 37,
             nama: "Avocado 1 Pcs",
             hargaIDR: 35000,
             hargaUSD: 1.94,
             kategori: "fruit",
-            gambar: "alpukat.jpg"
+            gambar: "alpukat.jpg",
+            ingredients: "100% Fresh ripe avocado."
         }, {
+            id: 38,
             nama: "Watermelon 1 Pcs",
             hargaIDR: 30000,
             hargaUSD: 1.66,
             kategori: "fruit",
-            gambar: "sem.png"
+            gambar: "sem.png",
+            ingredients: "Fresh sweet red seedless watermelon slice."
         }, {
+            id: 39,
             nama: "Melon 1 pcs",
             hargaIDR: 45000,
             hargaUSD: 2.50,
             kategori: "fruit",
-            gambar: "melon.jpg"
+            gambar: "melon.jpg",
+            ingredients: "Fresh sweet honeydew melon slice."
         }, {
+            id: 40,
             nama: "Banana 1 Pcs",
             hargaIDR: 25000,
             hargaUSD: 1.40,
             kategori: "fruit",
-            gambar: "pisang.jpg"
+            gambar: "pisang.jpg",
+            ingredients: "100% Fresh Cavendish banana."
         }, {
+            id: 41,
             nama: "Pineapple 1 Pcs",
             hargaIDR: 40000,
             hargaUSD: 2.22,
             kategori: "fruit",
-            gambar: "nanas.jpg"
+            gambar: "nanas.jpg",
+            ingredients: "Fresh sweet tropical pineapple slice."
         }, {
+            id: 42,
             nama: "Marlboro Hard Pack Special Edition 20",
             hargaIDR: 50000,
             hargaUSD: 2.77,
             kategori: "cigarette",
-            gambar: "mbred.jpg"
+            gambar: "mbred.jpg",
+            ingredients: "Premium tobacco blend, filter, 20 sticks per pack."
         }, {
+            id: 43,
             nama: "Sampoerna Mild 16",
             hargaIDR: 40000,
             hargaUSD: 2.22,
             kategori: "cigarette",
-            gambar: "sm.jpg"
+            gambar: "sm.jpg",
+            ingredients: "Indonesian clove (kretek) and fine tobacco blend, 16 sticks."
         }, {
+            id: 44,
             nama: "Gudang Garam Filter 12",
             hargaIDR: 30000,
             hargaUSD: 1.66,
             kategori: "cigarette",
-            gambar: "garpit.webp"
+            gambar: "garpit.webp",
+            ingredients: "Full-flavored clove (kretek) cigarette, 12 sticks."
         }, {
+            id: 45,
             nama: "Magnum Filter 12",
             hargaIDR: 27000,
             hargaUSD: 1.50,
             kategori: "cigarette",
-            gambar: "magnum.jpg"
+            gambar: "magnum.png",
+            ingredients: "Filtered clove cigarette, 12 sticks."
         }, {
+            id: 46,
             nama: "Dji Samsoe 12",
             hargaIDR: 25000,
             hargaUSD: 1.40,
             kategori: "cigarette",
-            gambar: "djss.jpg"
+            gambar: "djss.jpg",
+            ingredients: "Classic hand-rolled unfiltered clove cigarette, 12 sticks."
         }, {
+            id: 47,
             nama: "Marlboro Filter Black 12",
             hargaIDR: 28000,
             hargaUSD: 1.55,
             kategori: "cigarette",
-            gambar: "marlong12.png"
+            gambar: "marlong12.png",
+            ingredients: "Air-cured tobacco with clove essence, 12 sticks."
         }, {
+            id: 48,
             nama: "Marlboro Filter Black 16",
             hargaIDR: 37000,
             hargaUSD: 2.06,
             kategori: "cigarette",
-            gambar: "marlong16.png"
+            gambar: "marlong16.png",
+            ingredients: "Air-cured tobacco with clove essence, 16 sticks."
         }, {
+            id: 49,
             nama: "Marlboro Ice Burst 20",
             hargaIDR: 60000,
             hargaUSD: 3.33,
             kategori: "cigarette",
-            gambar: "mice.jpg"
+            gambar: "mice.jpg",
+            ingredients: "Menthol tobacco with menthol capsule burst, 20 sticks."
         }, {
+            id: 50,
             nama: "Marlboro Gold Light Special Edition 20",
             hargaIDR: 47000,
             hargaUSD: 2.60,
             kategori: "cigarette",
-            gambar: "mgold.jpg"
+            gambar: "mgold.jpg",
+            ingredients: "Smooth light tobacco blend, 20 sticks."
         }, {
+            id: 51,
             nama: "Sampoerna Avolution 20",
             hargaIDR: 45000,
             hargaUSD: 2.50,
             kategori: "cigarette",
-            gambar: "sav.png"
+            gambar: "sav.png",
+            ingredients: "Slim-format low tar clove cigarette, 20 sticks."
         }, {
+            id: 52,
             nama: "LA Mild 16",
             hargaIDR: 35000,
             hargaUSD: 1.94,
             kategori: "cigarette",
-            gambar: "la.webp"
+            gambar: "la.webp",
+            ingredients: "Light smooth clove cigarette, 16 sticks."
         }, {
+            id: 53,
             nama: "LA Ice 16",
             hargaIDR: 38000,
             hargaUSD: 2.11,
             kategori: "cigarette",
-            gambar: "la.jpg"
+            gambar: "la.jpg",
+            ingredients: "Menthol light clove cigarette with cooling sensation, 16 sticks."
         }, {
+            id: 54,
             nama: "LA Ice Purple Boost 16",
             hargaIDR: 38000,
             hargaUSD: 2.11,
             kategori: "cigarette",
-            gambar: "lapur.jpg"
+            gambar: "lapur.jpg",
+            ingredients: "Berry-flavored capsule menthol clove cigarette, 16 sticks."
         }, {
+            id: 55,
             nama: "Esse Change Juicy 20",
             hargaIDR: 47000,
             hargaUSD: 2.60,
             kategori: "cigarette",
-            gambar: "essej.jpg"
+            gambar: "essej.jpg",
+            ingredients: "Super slim cigarette with juicy fruit capsule, 20 sticks."
         }, {
+            id: 56,
             nama: "Esse Change Applemint 20",
             hargaIDR: 47000,
             hargaUSD: 2.60,
             kategori: "cigarette",
-            gambar: "essea.jpg"
+            gambar: "essea.jpg",
+            ingredients: "Super slim cigarette with applemint flavor capsule, 20 sticks."
         }, {
+            id: 57,
             nama: "Esse Double Pop 20",
             hargaIDR: 47000,
             hargaUSD: 2.60,
             kategori: "cigarette",
-            gambar: "essed.jpg"
+            gambar: "essed.jpg",
+            ingredients: "Super slim cigarette with double flavor capsules, 20 sticks."
         }, {
+            id: 58,
             nama: "Esse Change Filter Grape 20",
             hargaIDR: 47000,
             hargaUSD: 2.60,
             kategori: "cigarette",
-            gambar: "esseg.jpg"
+            gambar: "esseg.jpg",
+            ingredients: "Super slim cigarette with grape flavor capsule, 20 sticks."
         }, {
+            id: 59,
             nama: "Waypoint Jersey (S-XXL)",
             hargaIDR: 175000,
             hargaUSD: 7.50,
             kategori: "souvenir",
-            gambar: "wpj.png"
+            gambar: "wpj.png",
+            ingredients: "100% Breathable dry-fit polyester fabric with custom Waypoint maritime sublimation print."
         }, {
+            id: 60,
             nama: "Waypoint Keychain",
             hargaIDR: 25000,
             hargaUSD: 1.40,
             kategori: "souvenir",
-            gambar: "keyc.png"
+            gambar: "keyc.png",
+            ingredients: "Durable acrylic and stainless steel keyring with engraved Waypoint logo."
         }, {
+            id: 61,
             nama: "Waypoint Cap",
             hargaIDR: 85000,
             hargaUSD: 4.70,
             kategori: "souvenir",
-            gambar: "cap.png"
+            gambar: "cap.png",
+            ingredients: "Premium cotton twill baseball cap with embroidered logo and adjustable brass strap."
         }, {
+            id: 62,
             nama: "Waypoint Ceramic Mug",
             hargaIDR: 45000,
             hargaUSD: 2.50,
             kategori: "souvenir",
-            gambar: "mug.png"
+            gambar: "mug.png",
+            ingredients: "High-grade 11oz ceramic mug with heat-resistant handle and high-gloss print finish."
         }, {
+            id: 63,
             nama: "Waypoint Umbrella",
             hargaIDR: 40000,
             hargaUSD: 2.30,
             kategori: "souvenir",
-            gambar: "umb.png"
+            gambar: "umb.png",
+            ingredients: "Waterproof pongee canopy with windproof fiberglass frame and automatic open button."
         }, {
+            id: 64,
             nama: "Tumbler Stainless Steel",
             hargaIDR: 135000,
             hargaUSD: 7.50,
             kategori: "souvenir",
-            gambar: "tumb.png"
+            gambar: "tumb.png",
+            ingredients: "Double-wall 304 food-grade stainless steel vacuum insulated tumbler (500ml)."
         }];
 
         let keranjang = JSON.parse(localStorage.getItem('waypoint_cart')) || [];
@@ -871,20 +1042,33 @@
             const container = document.getElementById('menu-list');
             container.innerHTML = '';
 
-            databaseMenu.forEach(item => {
+            databaseMenu.forEach((item, idx) => {
                 if (item.kategori.toLowerCase() === kategori.toLowerCase()) {
                     container.innerHTML += `
                 <div class="menu-item">
-                    <img src="${item.gambar}" class="menu-img" alt="${item.nama}">
+                    <div class="img-wrapper" onclick="toggleDetail(${item.id})" title="Click image to see details">
+                        <img src="${item.gambar}" class="menu-img" alt="${item.nama}">
+                    </div>
                     <div class="menu-info">
                         <h3>${item.nama}</h3>
-                        <p style="color: var(--primary); font-weight:400; margin:0;">Rp ${item.hargaIDR.toLocaleString('id-ID')} ($${item.hargaUSD.toFixed(2)})</p>
+                        <p class="menu-price">Rp ${item.hargaIDR.toLocaleString('id-ID')} ($${item.hargaUSD.toFixed(2)})</p>
+                        <div class="menu-ingredients" id="detail-${item.id}">
+                            <strong>Ingredients / Detail:</strong><br>
+                            ${item.ingredients || 'No description available.'}
+                        </div>
                     </div>
                     <button class="btn-tambah" onclick="tambahKeKeranjang('${item.nama}', ${item.hargaIDR}, ${item.hargaUSD}, event)">+ Add to Cart</button>
                 </div>
             `;
                 }
             });
+        }
+
+        function toggleDetail(id) {
+            const el = document.getElementById(`detail-${id}`);
+            if (el) {
+                el.classList.toggle('show');
+            }
         }
 
         function filterMenu(kategori, btn) {
