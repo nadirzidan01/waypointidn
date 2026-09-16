@@ -389,7 +389,7 @@
         }
         
         .footer-banner {
-            background-color: var(--footer-bg);
+            background-color: var(--primary);
             color: #f8fafc;
             padding: 24px 5%;
             margin-top: 50px;
@@ -526,7 +526,7 @@
             <ul class="nav-links">
                 <li><a href="index.html" class="nav-link-item">Home</a></li>
                 <li><a href="menu.html" class="nav-link-item">Menu</a></li>
-                <li><a href="order.html" class="nav-link-item">Order</a></li>
+                <li><a href="order.html" class="nav-link-item active">Order</a></li>
                 <li><a href="about.html" class="nav-link-item">About Us</a></li>
             </ul>
         </nav>
@@ -670,12 +670,14 @@
                 const hIDR = item.hargaIDR || 0;
                 const hUSD = item.hargaUSD || 0;
                 const qty = item.qty || 1;
+                const imgUrl = item.gambar || item.image || 'wplogo.webp';
 
                 if (!acc[namaBarang]) {
                     acc[namaBarang] = {
                         nama: namaBarang,
                         hargaIDR: hIDR,
                         hargaUSD: hUSD,
+                        gambar: imgUrl,
                         jumlah: 0
                     };
                 }
@@ -710,7 +712,10 @@
                     const namaAmanHapus = itemGroup.nama.replace(/'/g, "\\'").replace(/"/g, '&quot;');
 
                     li.innerHTML = `
-                        <span>${itemGroup.nama}${qtyText} - Rp ${totalItemHargaIDR.toLocaleString('id-ID')} ($${totalItemHargaUSD.toFixed(2)})</span>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <img src="${itemGroup.gambar}" alt="${itemGroup.nama}" style="width: 45px; height: 45px; object-fit: contain; border-radius: 8px; background: #f8fafc; padding: 3px; border: 1px solid #e2e8f0;">
+                            <span>${itemGroup.nama}${qtyText} - Rp ${totalItemHargaIDR.toLocaleString('id-ID')} ($${totalItemHargaUSD.toFixed(2)})</span>
+                        </div>
                         <button onclick="hapusSatuItem('${namaAmanHapus}')" title="Reduce/Remove item" style="
                             background: transparent;
                             color: #ef4444;
