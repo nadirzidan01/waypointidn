@@ -1070,6 +1070,7 @@
 
             databaseMenu.forEach((item, idx) => {
                 if (item.kategori.toLowerCase() === kategori.toLowerCase()) {
+                    const namaAman = item.nama.replace(/'/g, "\\'").replace(/"/g, '&quot;');
                     container.innerHTML += `
                 <div class="menu-item">
                     <div class="img-wrapper" onclick="toggleDetail(${item.id})" title="Click image to see details">
@@ -1083,7 +1084,7 @@
                             ${item.ingredients || 'No description available.'}
                         </div>
                     </div>
-                    <button class="btn-tambah" onclick="tambahKeKeranjang('${item.nama}', ${item.hargaIDR}, ${item.hargaUSD}, event)">+ Add to Cart</button>
+                    <button class="btn-tambah" onclick="tambahKeKeranjang('${namaAman}', ${item.hargaIDR}, ${item.hargaUSD}, '${item.gambar}')">+ Add to Cart</button>
                 </div>
             `;
                 }
@@ -1103,16 +1104,18 @@
             renderMenu(kategori);
         }
 
-        function tambahKeKeranjang(namaItem, hargaIDR, hargaUSD, event) {
-            const existingIndex = keranjang.findIndex(item => item.namaItem === namaItem);
+        function tambahKeKeranjang(namaItem, hargaIDR, hargaUSD, gambar) {
+            const existingIndex = keranjang.findIndex(item => (item.namaItem === namaItem || item.nama === namaItem));
 
             if (existingIndex > -1) {
-                keranjang[existingIndex].qty += 1;
+                keranjang[existingIndex].qty = (keranjang[existingIndex].qty || 1) + 1;
             } else {
                 keranjang.push({
-                    namaItem,
-                    hargaIDR,
-                    hargaUSD,
+                    namaItem: namaItem,
+                    nama: namaItem,
+                    hargaIDR: hargaIDR,
+                    hargaUSD: hargaUSD,
+                    gambar: gambar,
                     qty: 1
                 });
             }
