@@ -416,7 +416,7 @@
                     <div class="feature-item">
                         <span class="feature-icon"></span>
                         <h3>Express Delivery</h3>
-                        <p>Ensuring a maximum delivery time of 15 minutes to your vessel</p>
+                        <p>Ensuring a maximum delivery time of 30 minutes to your vessel</p>
                     </div>
 
                     <div class="feature-item">
@@ -484,7 +484,6 @@
         </div>
     </footer>
     <script>
-        // Synchronize cart counter badge
         let keranjang = JSON.parse(localStorage.getItem('waypoint_cart')) || [];
         let totalQty = keranjang.reduce((sum, item) => sum + (item.qty || 1), 0);
         document.getElementById('nav-cart-count').textContent = totalQty;
